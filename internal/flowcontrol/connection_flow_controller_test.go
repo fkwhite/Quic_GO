@@ -3,8 +3,8 @@ package flowcontrol
 import (
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/utils"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

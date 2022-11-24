@@ -3,8 +3,8 @@ package quic
 import (
 	"fmt"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 )
 
 type retransmissionQueue struct {

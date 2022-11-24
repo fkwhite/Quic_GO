@@ -15,8 +15,8 @@ import (
 	"golang.org/x/net/ipv6"
 	"golang.org/x/sys/unix"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/utils"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
 )
 
 const (

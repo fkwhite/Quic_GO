@@ -5,10 +5,10 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/fkwhite/quic-goV2/fuzzing/header"
-	"github.com/fkwhite/quic-goV2/fuzzing/internal/helper"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Superquic-v1/fuzzing/header"
+	"github.com/fkwhite/Superquic-v1/fuzzing/internal/helper"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 )
 
 const version = protocol.VersionTLS

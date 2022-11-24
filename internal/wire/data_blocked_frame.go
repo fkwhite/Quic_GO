@@ -3,8 +3,8 @@ package wire
 import (
 	"bytes"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 )
 
 // A DataBlockedFrame is a DATA_BLOCKED frame

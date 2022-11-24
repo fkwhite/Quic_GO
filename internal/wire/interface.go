@@ -3,7 +3,7 @@ package wire
 import (
 	"bytes"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
 )
 
 // A Frame in QUIC

@@ -13,12 +13,12 @@ import (
 	"os"
 	"sync"
 
-	"github.com/fkwhite/quic-goV2"
-	"github.com/fkwhite/quic-goV2/http3"
-	"github.com/fkwhite/quic-goV2/internal/testdata"
-	"github.com/fkwhite/quic-goV2/internal/utils"
-	"github.com/fkwhite/quic-goV2/logging"
-	"github.com/fkwhite/quic-goV2/qlog"
+	"github.com/fkwhite/Superquic-v1"
+	"github.com/fkwhite/Superquic-v1/http3"
+	"github.com/fkwhite/Superquic-v1/internal/testdata"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Superquic-v1/qlog"
 )
 
 func main() {

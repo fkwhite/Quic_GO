@@ -13,12 +13,12 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"github.com/fkwhite/quic-goV2"
-	mockquic "github.com/fkwhite/quic-goV2/internal/mocks/quic"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1"
+	mockquic "github.com/fkwhite/Superquic-v1/internal/mocks/quic"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/utils"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
 	"github.com/marten-seemann/qpack"
 
 	. "github.com/onsi/ginkgo"

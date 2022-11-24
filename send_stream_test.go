@@ -9,10 +9,10 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"github.com/fkwhite/quic-goV2/internal/ackhandler"
-	"github.com/fkwhite/quic-goV2/internal/mocks"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Superquic-v1/internal/ackhandler"
+	"github.com/fkwhite/Superquic-v1/internal/mocks"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

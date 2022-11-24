@@ -7,7 +7,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
 )
 
 const (

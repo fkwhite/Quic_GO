@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/utils"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 )
 
 // ErrInvalidReservedBits is returned when the reserved bits are incorrect.

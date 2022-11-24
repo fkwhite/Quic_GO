@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

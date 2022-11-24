@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"math/rand"
 
-	"github.com/fkwhite/quic-goV2/internal/ackhandler"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Superquic-v1/internal/ackhandler"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 
 	"github.com/golang/mock/gomock"
 

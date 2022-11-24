@@ -9,8 +9,8 @@ import (
 	time "time"
 
 	gomock "github.com/golang/mock/gomock"
-	ackhandler "github.com/fkwhite/quic-goV2/internal/ackhandler"
-	protocol "github.com/fkwhite/quic-goV2/internal/protocol"
+	ackhandler "github.com/fkwhite/Superquic-v1/internal/ackhandler"
+	protocol "github.com/fkwhite/Superquic-v1/internal/protocol"
 )
 
 // MockMtuDiscoverer is a mock of MtuDiscoverer interface.

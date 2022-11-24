@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

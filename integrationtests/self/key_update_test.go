@@ -6,10 +6,10 @@ import (
 	"io"
 	"net"
 
-	quic "github.com/fkwhite/quic-goV2"
-	"github.com/fkwhite/quic-goV2/internal/handshake"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/logging"
+	quic "github.com/fkwhite/Superquic-v1"
+	"github.com/fkwhite/Superquic-v1/internal/handshake"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/logging"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

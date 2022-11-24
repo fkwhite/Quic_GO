@@ -6,9 +6,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/utils"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 )
 
 var errInvalidAckRanges = errors.New("AckFrame: ACK frame contains invalid ACK ranges")

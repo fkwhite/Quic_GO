@@ -3,7 +3,7 @@ package qerr
 import (
 	"fmt"
 
-	"github.com/fkwhite/quic-goV2/internal/qtls"
+	"github.com/fkwhite/Superquic-v1/internal/qtls"
 )
 
 // TransportErrorCode is a QUIC transport error.

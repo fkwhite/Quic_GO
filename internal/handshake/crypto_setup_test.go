@@ -10,12 +10,12 @@ import (
 	"math/big"
 	"time"
 
-	mocktls "github.com/fkwhite/quic-goV2/internal/mocks/tls"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/qerr"
-	"github.com/fkwhite/quic-goV2/internal/testdata"
-	"github.com/fkwhite/quic-goV2/internal/utils"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	mocktls "github.com/fkwhite/Superquic-v1/internal/mocks/tls"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/qerr"
+	"github.com/fkwhite/Superquic-v1/internal/testdata"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
 
 	"github.com/golang/mock/gomock"
 

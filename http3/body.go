@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/fkwhite/quic-goV2"
+	"github.com/fkwhite/Superquic-v1"
 )
 
 // The body of a http.Request or http.Response.

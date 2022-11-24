@@ -8,9 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fkwhite/quic-goV2/logging"
+	"github.com/fkwhite/Superquic-v1/logging"
 
-	"github.com/fkwhite/quic-goV2/internal/utils"
+	"github.com/fkwhite/Superquic-v1/internal/utils"
 )
 
 // GetSSLKeyLog creates a file for the TLS key log

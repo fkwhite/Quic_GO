@@ -5,8 +5,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 )
 
 // A NewTokenFrame is a NEW_TOKEN frame

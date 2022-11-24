@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/wire"
-	"github.com/fkwhite/quic-goV2/quicvarint"
+	"github.com/fkwhite/Superquic-v1/internal/wire"
+	"github.com/fkwhite/Superquic-v1/quicvarint"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

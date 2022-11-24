@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/fkwhite/quic-goV2/internal/protocol"
+	"github.com/fkwhite/Superquic-v1/internal/protocol"
 )
 
 // taken from the QUIC draft
