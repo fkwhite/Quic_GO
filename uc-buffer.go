@@ -51,18 +51,18 @@ func GlobalBuffersLog(streamIdx int) {
 	}
 	defer f.Close()
 
-	// for key1, map_ := range globalBuffers.registerOut[streamIdx] {
-	// 	for key2, element := range map_ {
-	// 		logMessage := fmt.Sprint(key1, " ", key2, " ", element, "\n")
-	// 		//fmt.Println(logMessage) //por pantalla
-	// 		_, err = f.WriteString(logMessage) //fichero log
-	// 		if err != nil {
-	// 			fmt.Println("An error has ocurred -- Writing file")
-	// 			panic(err)
-	// 		}
-	// 	}
+	for key1, map_ := range globalBuffers.registerOut[streamIdx] {
+		for key2, element := range map_ {
+			logMessage := fmt.Sprint(key1, " ", key2, " ", element, "\n")
+			//fmt.Println(logMessage) //por pantalla
+			_, err = f.WriteString(logMessage) //fichero log
+			if err != nil {
+				fmt.Println("An error has ocurred -- Writing file")
+				panic(err)
+			}
+		}
 
-	// }
+	}
 
 }
 
@@ -128,6 +128,7 @@ func GlobalBuffersWrite(streamIdx int, newVal float64) {
 
 func GlobalBuffersTotalDelay(streamIdx int) int64 {
 	var sum int64
+	sum = 0
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
 	for val, _ := range globalBuffers.registerIn[streamIdx] {
