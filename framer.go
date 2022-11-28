@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/ackhandler"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/quic-goV2/internal/ackhandler"
+	"github.com/fkwhite/quic-goV2/internal/protocol"
+	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/quic-goV2/quicvarint"
 )
 
 type Configuration struct {
@@ -178,6 +178,7 @@ func (f *framerI) SchedulerProposalQueuing(frames []ackhandler.Frame, maxLen pro
 		// fmt.Println("Bytes para enviar ", str.RemainingBytes(), "\n")
 		// fmt.Println("Bytes para RTX ", str.BytesToRetransmit(), "\n")
 		//fmt.Println("Bytes para Next Stream ", str.nextFrame.DataLen(), "\n")
+		_ = GlobalBuffersTotalDelay(int(id/4), "Proposal")
 		totalTX := str.TotalQueue() + buffBytes // bufferTx + bufferRtx + bufferNextFrame   + buffer Real (app)
 		r[i] = totalTX
 		sum_r += r[i]
@@ -282,7 +283,7 @@ func (f *framerI) SchedulerDelayQueuing(frames []ackhandler.Frame, maxLen protoc
 		id := f.streamQueue[i]
 		str, _ := f.streamGetter.GetOrOpenSendStream(id)
 
-		sum[i] = GlobalBuffersTotalDelay(int(id / 4))
+		sum[i] = GlobalBuffersTotalDelay(int(id/4), "Delay")
 
 		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
 
@@ -409,6 +410,8 @@ func (f *framerI) SchedulerWFQ(frames []ackhandler.Frame, maxLen protocol.ByteCo
 			totalTX := str.TotalQueue() // bufferTx + bufferRtx + bufferNextFrame
 			r[j] = totalTX
 			N += weightArray[j]
+			_ = GlobalBuffersTotalDelay(int(id/4), "WFQ")
+
 		}
 		aux := make([]protocol.StreamID, len(f.streamQueue))
 		auxWeight := make([]float64, len(f.streamQueue))
@@ -514,6 +517,7 @@ func (f *framerI) SchedulerFairQueuing(frames []ackhandler.Frame, maxLen protoco
 			// buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
 			totalTX := str.TotalQueue() // bufferTx + bufferRtx + bufferNextFrame
 			r[j] = totalTX
+			_ = GlobalBuffersTotalDelay(int(id/4), "FQ")
 		}
 
 		aux := make([]protocol.StreamID, len(f.streamQueue))
@@ -658,6 +662,7 @@ func (f *framerI) AppendStreamFrames(frames []ackhandler.Frame, maxLen protocol.
 		remainingLen += quicvarint.Len(uint64(remainingLen))
 		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
 		totalTX := str.TotalQueue() + buffBytes // bufferTx + bufferRtx + bufferNextFrame
+		_ = GlobalBuffersTotalDelay(int(id/4), "RR")
 		// fmt.Println("+++RR=    Bytes Buffer en el stream ", id, ":  ", buffBytes)
 		frame, hasMoreData := str.popStreamFrame(remainingLen)
 		if hasMoreData { // put the stream back in the queue (at the end)

@@ -126,7 +126,27 @@ func GlobalBuffersWrite(streamIdx int, newVal float64) {
 	globalBuffers.registerOut[streamIdx] = make(map[int64]map[int64]float64)
 }
 
-func GlobalBuffersTotalDelay(streamIdx int) int64 {
+func GlobalBuffersSojournTimeLog(scheduler string, timestamp int64, id int, sum int64) {
+
+	nameFile := fmt.Sprint("tmp/logSchedulerSojournTime_", scheduler, ".log") //logSchedulerXX.log
+	f, err := os.OpenFile(nameFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)  //os.O_TRUNC
+	if err != nil {
+		fmt.Println("An error has ocurred -- Opening file")
+		panic(err)
+	}
+	defer f.Close()
+
+	logMessage := fmt.Sprint(timestamp, "	", id, "	", sum, "\n")
+	//fmt.Println(logMessage) //por pantalla
+	_, err = f.WriteString(logMessage) //fichero log
+	if err != nil {
+		fmt.Println("An error has ocurred -- Writing file")
+		panic(err)
+	}
+
+}
+
+func GlobalBuffersTotalDelay(streamIdx int, scheduler string) int64 {
 	var sum int64
 	sum = 0
 	globalBuffers.mtxs[streamIdx].Lock()
@@ -134,5 +154,8 @@ func GlobalBuffersTotalDelay(streamIdx int) int64 {
 	for val, _ := range globalBuffers.registerIn[streamIdx] {
 		sum += val
 	}
+
+	timestamp := time.Now().UnixMicro()
+	GlobalBuffersSojournTimeLog(scheduler, timestamp, streamIdx, sum)
 	return sum
 }
