@@ -9,12 +9,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/fkwhite/quic-goV2/internal/ackhandler"
-	"github.com/fkwhite/quic-goV2/internal/handshake"
-	"github.com/fkwhite/quic-goV2/internal/protocol"
-	"github.com/fkwhite/quic-goV2/internal/qerr"
-	"github.com/fkwhite/quic-goV2/internal/utils"
-	"github.com/fkwhite/quic-goV2/internal/wire"
+	"github.com/fkwhite/Quic_GO/internal/ackhandler"
+	"github.com/fkwhite/Quic_GO/internal/handshake"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qerr"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/wire"
 )
 
 type packer interface {
