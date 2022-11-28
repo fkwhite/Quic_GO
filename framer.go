@@ -178,7 +178,9 @@ func (f *framerI) SchedulerProposalQueuing(frames []ackhandler.Frame, maxLen pro
 		// fmt.Println("Bytes para enviar ", str.RemainingBytes(), "\n")
 		// fmt.Println("Bytes para RTX ", str.BytesToRetransmit(), "\n")
 		//fmt.Println("Bytes para Next Stream ", str.nextFrame.DataLen(), "\n")
-		_ = GlobalBuffersTotalDelay(int(id/4), "Proposal")
+		sum := GlobalBuffersTotalDelay(int(id / 4))
+		timestamp := time.Now().UnixMicro()
+		GlobalBuffersSojournTimeLog("Proposal", timestamp, int(id/4), sum)
 		totalTX := str.TotalQueue() + buffBytes // bufferTx + bufferRtx + bufferNextFrame   + buffer Real (app)
 		r[i] = totalTX
 		sum_r += r[i]
@@ -283,8 +285,9 @@ func (f *framerI) SchedulerDelayQueuing(frames []ackhandler.Frame, maxLen protoc
 		id := f.streamQueue[i]
 		str, _ := f.streamGetter.GetOrOpenSendStream(id)
 
-		sum[i] = GlobalBuffersTotalDelay(int(id/4), "Delay")
-
+		sum[i] = GlobalBuffersTotalDelay(int(id / 4))
+		timestamp := time.Now().UnixMicro()
+		GlobalBuffersSojournTimeLog("Delay", timestamp, int(id/4), sum[i])
 		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
 
 		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
@@ -410,8 +413,9 @@ func (f *framerI) SchedulerWFQ(frames []ackhandler.Frame, maxLen protocol.ByteCo
 			totalTX := str.TotalQueue() // bufferTx + bufferRtx + bufferNextFrame
 			r[j] = totalTX
 			N += weightArray[j]
-			_ = GlobalBuffersTotalDelay(int(id/4), "WFQ")
-
+			sum := GlobalBuffersTotalDelay(int(id / 4))
+			timestamp := time.Now().UnixMicro()
+			GlobalBuffersSojournTimeLog("WFQ", timestamp, int(id/4), sum)
 		}
 		aux := make([]protocol.StreamID, len(f.streamQueue))
 		auxWeight := make([]float64, len(f.streamQueue))
@@ -517,7 +521,9 @@ func (f *framerI) SchedulerFairQueuing(frames []ackhandler.Frame, maxLen protoco
 			// buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
 			totalTX := str.TotalQueue() // bufferTx + bufferRtx + bufferNextFrame
 			r[j] = totalTX
-			_ = GlobalBuffersTotalDelay(int(id/4), "FQ")
+			sum := GlobalBuffersTotalDelay(int(id / 4))
+			timestamp := time.Now().UnixMicro()
+			GlobalBuffersSojournTimeLog("FQ", timestamp, int(id/4), sum)
 		}
 
 		aux := make([]protocol.StreamID, len(f.streamQueue))
@@ -661,8 +667,10 @@ func (f *framerI) AppendStreamFrames(frames []ackhandler.Frame, maxLen protocol.
 		// the STREAM frame (which will always have the DataLen set).
 		remainingLen += quicvarint.Len(uint64(remainingLen))
 		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
+		sum := GlobalBuffersTotalDelay(int(id / 4))
+		timestamp := time.Now().UnixMicro()
+		GlobalBuffersSojournTimeLog("RR", timestamp, int(id/4), sum)
 		totalTX := str.TotalQueue() + buffBytes // bufferTx + bufferRtx + bufferNextFrame
-		_ = GlobalBuffersTotalDelay(int(id/4), "RR")
 		// fmt.Println("+++RR=    Bytes Buffer en el stream ", id, ":  ", buffBytes)
 		frame, hasMoreData := str.popStreamFrame(remainingLen)
 		if hasMoreData { // put the stream back in the queue (at the end)
@@ -676,7 +684,7 @@ func (f *framerI) AppendStreamFrames(frames []ackhandler.Frame, maxLen protocol.
 		if frame == nil {
 			continue
 		}
-		timestamp := time.Now().UnixMicro()
+		timestamp = time.Now().UnixMicro()
 		writeFile("RR", timestamp, id, totalTX, frame.Length(f.version))
 		frames = append(frames, *frame)
 		length += frame.Length(f.version)
