@@ -6,8 +6,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 )
 
 type connection interface {
@@ -17,7 +17,7 @@ type connection interface {
 	io.Closer
 }
 
-// If the PacketConn passed to Dial or Listen satisfies this interface, Superquic-v1 will read the ECN bits from the IP header.
+// If the PacketConn passed to Dial or Listen satisfies this interface, Quic_GO will read the ECN bits from the IP header.
 // In this case, ReadMsgUDP() will be used instead of ReadFrom() to read packets.
 type OOBCapablePacketConn interface {
 	net.PacketConn

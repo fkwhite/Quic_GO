@@ -1,6 +1,6 @@
 package ackhandler
 
-import "github.com/fkwhite/Superquic-v1/internal/wire"
+import "github.com/fkwhite/Quic_GO/internal/wire"
 
 // IsFrameAckEliciting returns true if the frame is ack-eliciting.
 func IsFrameAckEliciting(f wire.Frame) bool {

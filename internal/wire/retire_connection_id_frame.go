@@ -3,8 +3,8 @@ package wire
 import (
 	"bytes"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/quicvarint"
 )
 
 // A RetireConnectionIDFrame is a RETIRE_CONNECTION_ID frame

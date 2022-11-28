@@ -9,7 +9,7 @@ import (
 	"net"
 	"syscall"
 
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 	"golang.org/x/sys/windows"
 )
 

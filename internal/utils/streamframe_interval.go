@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/fkwhite/Superquic-v1/internal/protocol"
+import "github.com/fkwhite/Quic_GO/internal/protocol"
 
 // ByteInterval is an interval from one ByteCount to the other
 type ByteInterval struct {

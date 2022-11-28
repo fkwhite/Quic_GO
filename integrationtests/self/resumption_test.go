@@ -7,7 +7,7 @@ import (
 	"net"
 	"sync"
 
-	quic "github.com/fkwhite/Superquic-v1"
+	quic "github.com/fkwhite/Quic_GO"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

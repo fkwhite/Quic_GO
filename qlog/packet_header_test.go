@@ -6,9 +6,9 @@ import (
 
 	"github.com/francoispqt/gojay"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/wire"
+	"github.com/fkwhite/Quic_GO/logging"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

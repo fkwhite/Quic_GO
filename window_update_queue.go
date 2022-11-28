@@ -3,9 +3,9 @@ package quic
 import (
 	"sync"
 
-	"github.com/fkwhite/Superquic-v1/internal/flowcontrol"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
+	"github.com/fkwhite/Quic_GO/internal/flowcontrol"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/wire"
 )
 
 type windowUpdateQueue struct {

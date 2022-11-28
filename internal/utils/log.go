@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// LogLevel of Superquic-v1
+// LogLevel of Quic_GO
 type LogLevel uint8
 
 const (
@@ -36,7 +36,7 @@ type Logger interface {
 	Debugf(format string, args ...interface{})
 }
 
-// DefaultLogger is used by Superquic-v1 for logging.
+// DefaultLogger is used by Quic_GO for logging.
 var DefaultLogger Logger
 
 type defaultLogger struct {
@@ -125,7 +125,7 @@ func readLoggingEnv() LogLevel {
 	case "error":
 		return LogLevelError
 	default:
-		fmt.Fprintln(os.Stderr, "invalid Superquic-v1 log level, see https://github.com/fkwhite/Superquic-v1/wiki/Logging")
+		fmt.Fprintln(os.Stderr, "invalid Quic_GO log level, see https://github.com/fkwhite/Quic_GO/wiki/Logging")
 		return LogLevelNothing
 	}
 }

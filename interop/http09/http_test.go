@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/internal/testdata"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/internal/testdata"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

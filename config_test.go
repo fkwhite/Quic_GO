@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"time"
 
-	mocklogging "github.com/fkwhite/Superquic-v1/internal/mocks/logging"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	mocklogging "github.com/fkwhite/Quic_GO/internal/mocks/logging"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

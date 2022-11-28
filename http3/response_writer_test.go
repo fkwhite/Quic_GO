@@ -5,8 +5,8 @@ import (
 	"io"
 	"net/http"
 
-	mockquic "github.com/fkwhite/Superquic-v1/internal/mocks/quic"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	mockquic "github.com/fkwhite/Quic_GO/internal/mocks/quic"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 
 	"github.com/golang/mock/gomock"
 	"github.com/marten-seemann/qpack"

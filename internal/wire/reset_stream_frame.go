@@ -3,9 +3,9 @@ package wire
 import (
 	"bytes"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/qerr"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qerr"
+	"github.com/fkwhite/Quic_GO/quicvarint"
 )
 
 // A ResetStreamFrame is a RESET_STREAM frame in QUIC

@@ -5,7 +5,7 @@ import (
 
 	"github.com/francoispqt/gojay"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 )
 
 type topLevel struct {
@@ -16,7 +16,7 @@ func (topLevel) IsNil() bool { return false }
 func (l topLevel) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.StringKey("qlog_format", "NDJSON")
 	enc.StringKey("qlog_version", "draft-02")
-	enc.StringKeyOmitEmpty("title", "Superquic-v1 qlog")
+	enc.StringKeyOmitEmpty("title", "Quic_GO qlog")
 	enc.StringKey("code_version", quicGoVersion)
 	enc.ObjectKey("trace", l.trace)
 }

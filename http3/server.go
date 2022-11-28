@@ -15,11 +15,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/internal/handshake"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/internal/handshake"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/quicvarint"
 	"github.com/marten-seemann/qpack"
 )
 
@@ -57,7 +57,7 @@ type contextKey struct {
 	name string
 }
 
-func (k *contextKey) String() string { return "Superquic-v1/http3 context value " + k.name }
+func (k *contextKey) String() string { return "Quic_GO/http3 context value " + k.name }
 
 // ServerContextKey is a context key. It can be used in HTTP
 // handlers with Context.Value to access the server that

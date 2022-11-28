@@ -8,8 +8,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/wire"
 )
 
 // When a stream is deleted before it was accepted, we can't delete it from the map immediately.

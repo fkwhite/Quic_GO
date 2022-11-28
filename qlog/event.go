@@ -6,10 +6,10 @@ import (
 	"net"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/logging"
 
 	"github.com/francoispqt/gojay"
 )

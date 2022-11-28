@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"sync"
 
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 )
 
 type singleOriginTokenStore struct {

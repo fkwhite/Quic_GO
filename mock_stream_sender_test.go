@@ -8,8 +8,8 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	protocol "github.com/fkwhite/Superquic-v1/internal/protocol"
-	wire "github.com/fkwhite/Superquic-v1/internal/wire"
+	protocol "github.com/fkwhite/Quic_GO/internal/protocol"
+	wire "github.com/fkwhite/Quic_GO/internal/wire"
 )
 
 // MockStreamSender is a mock of StreamSender interface.

@@ -11,11 +11,11 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/qtls"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qtls"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/quicvarint"
 	"github.com/marten-seemann/qpack"
 )
 
@@ -24,7 +24,7 @@ import (
 const MethodGet0RTT = "GET_0RTT"
 
 const (
-	defaultUserAgent              = "Superquic-v1 HTTP/3"
+	defaultUserAgent              = "Quic_GO HTTP/3"
 	defaultMaxResponseHeaderBytes = 10 * 1 << 20 // 10 MB
 )
 

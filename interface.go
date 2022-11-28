@@ -7,9 +7,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/handshake"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO/internal/handshake"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/logging"
 )
 
 // The StreamID is the ID of a QUIC stream.

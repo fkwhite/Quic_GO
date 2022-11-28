@@ -3,9 +3,9 @@ package qlog
 import (
 	"fmt"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/qerr"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qerr"
+	"github.com/fkwhite/Quic_GO/logging"
 )
 
 type owner uint8

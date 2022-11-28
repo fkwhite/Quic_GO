@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 )
 
 // A PathChallengeFrame is a PATH_CHALLENGE frame

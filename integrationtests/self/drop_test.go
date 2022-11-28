@@ -8,9 +8,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	quic "github.com/fkwhite/Superquic-v1"
-	quicproxy "github.com/fkwhite/Superquic-v1/integrationtests/tools/proxy"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	quic "github.com/fkwhite/Quic_GO"
+	quicproxy "github.com/fkwhite/Quic_GO/integrationtests/tools/proxy"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

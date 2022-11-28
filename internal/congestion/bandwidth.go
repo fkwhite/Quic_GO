@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 )
 
 // Bandwidth of a connection

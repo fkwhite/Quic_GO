@@ -1,4 +1,4 @@
-module github.com/fkwhite/Superquic-v1
+module github.com/fkwhite/Quic_GO
 
 go 1.19
 

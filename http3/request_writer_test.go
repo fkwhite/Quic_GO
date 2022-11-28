@@ -9,8 +9,8 @@ import (
 	"github.com/marten-seemann/qpack"
 
 	"github.com/golang/mock/gomock"
-	mockquic "github.com/fkwhite/Superquic-v1/internal/mocks/quic"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	mockquic "github.com/fkwhite/Quic_GO/internal/mocks/quic"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

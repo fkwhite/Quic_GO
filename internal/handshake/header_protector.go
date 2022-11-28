@@ -9,7 +9,7 @@ import (
 
 	"golang.org/x/crypto/chacha20"
 
-	"github.com/fkwhite/Superquic-v1/internal/qtls"
+	"github.com/fkwhite/Quic_GO/internal/qtls"
 )
 
 type headerProtector interface {

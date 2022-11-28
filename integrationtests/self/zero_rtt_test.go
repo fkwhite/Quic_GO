@@ -12,11 +12,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1"
-	quicproxy "github.com/fkwhite/Superquic-v1/integrationtests/tools/proxy"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO"
+	quicproxy "github.com/fkwhite/Quic_GO/integrationtests/tools/proxy"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/wire"
+	"github.com/fkwhite/Quic_GO/logging"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"

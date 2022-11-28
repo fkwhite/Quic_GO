@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"github.com/fkwhite/Superquic-v1"
-	mockquic "github.com/fkwhite/Superquic-v1/internal/mocks/quic"
+	"github.com/fkwhite/Quic_GO"
+	mockquic "github.com/fkwhite/Quic_GO/internal/mocks/quic"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

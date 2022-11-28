@@ -3,8 +3,8 @@ package congestion
 import (
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 )
 
 // Note(pwestin): the magic clamping numbers come from the original code in

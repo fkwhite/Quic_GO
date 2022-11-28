@@ -18,12 +18,12 @@ import (
 
 	_ "net/http/pprof"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/http3"
-	"github.com/fkwhite/Superquic-v1/internal/testdata"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
-	"github.com/fkwhite/Superquic-v1/logging"
-	"github.com/fkwhite/Superquic-v1/qlog"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/http3"
+	"github.com/fkwhite/Quic_GO/internal/testdata"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/logging"
+	"github.com/fkwhite/Quic_GO/qlog"
 )
 
 type binds []string

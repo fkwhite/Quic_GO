@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/quicvarint"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/quicvarint"
 )
 
 // A ConnectionCloseFrame is a CONNECTION_CLOSE frame

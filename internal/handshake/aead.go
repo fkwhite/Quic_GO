@@ -4,9 +4,9 @@ import (
 	"crypto/cipher"
 	"encoding/binary"
 
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/qtls"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qtls"
+	"github.com/fkwhite/Quic_GO/internal/utils"
 )
 
 func createAEAD(suite *qtls.CipherSuiteTLS13, trafficSecret []byte) cipher.AEAD {

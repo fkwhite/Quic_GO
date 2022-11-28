@@ -12,7 +12,7 @@ import (
 	"log"
 	"math/big"
 
-	quic "github.com/fkwhite/Superquic-v1"
+	quic "github.com/fkwhite/Quic_GO"
 )
 
 const addr = "localhost:4242"

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
 )
 
 // NewConnectionID is a new connection ID

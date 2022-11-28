@@ -14,13 +14,13 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/fkwhite/Superquic-v1"
-	"github.com/fkwhite/Superquic-v1/http3"
-	"github.com/fkwhite/Superquic-v1/internal/handshake"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/interop/http09"
-	"github.com/fkwhite/Superquic-v1/interop/utils"
-	"github.com/fkwhite/Superquic-v1/qlog"
+	"github.com/fkwhite/Quic_GO"
+	"github.com/fkwhite/Quic_GO/http3"
+	"github.com/fkwhite/Quic_GO/internal/handshake"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/interop/http09"
+	"github.com/fkwhite/Quic_GO/interop/utils"
+	"github.com/fkwhite/Quic_GO/qlog"
 )
 
 var errUnsupported = errors.New("unsupported test case")

@@ -13,17 +13,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fkwhite/Superquic-v1/internal/ackhandler"
-	"github.com/fkwhite/Superquic-v1/internal/handshake"
-	"github.com/fkwhite/Superquic-v1/internal/mocks"
-	mockackhandler "github.com/fkwhite/Superquic-v1/internal/mocks/ackhandler"
-	mocklogging "github.com/fkwhite/Superquic-v1/internal/mocks/logging"
-	"github.com/fkwhite/Superquic-v1/internal/protocol"
-	"github.com/fkwhite/Superquic-v1/internal/qerr"
-	"github.com/fkwhite/Superquic-v1/internal/testutils"
-	"github.com/fkwhite/Superquic-v1/internal/utils"
-	"github.com/fkwhite/Superquic-v1/internal/wire"
-	"github.com/fkwhite/Superquic-v1/logging"
+	"github.com/fkwhite/Quic_GO/internal/ackhandler"
+	"github.com/fkwhite/Quic_GO/internal/handshake"
+	"github.com/fkwhite/Quic_GO/internal/mocks"
+	mockackhandler "github.com/fkwhite/Quic_GO/internal/mocks/ackhandler"
+	mocklogging "github.com/fkwhite/Quic_GO/internal/mocks/logging"
+	"github.com/fkwhite/Quic_GO/internal/protocol"
+	"github.com/fkwhite/Quic_GO/internal/qerr"
+	"github.com/fkwhite/Quic_GO/internal/testutils"
+	"github.com/fkwhite/Quic_GO/internal/utils"
+	"github.com/fkwhite/Quic_GO/internal/wire"
+	"github.com/fkwhite/Quic_GO/logging"
 
 	"github.com/golang/mock/gomock"
 
@@ -34,13 +34,13 @@ import (
 func areSessionsRunning() bool {
 	var b bytes.Buffer
 	pprof.Lookup("goroutine").WriteTo(&b, 1)
-	return strings.Contains(b.String(), "Superquic-v1.(*session).run")
+	return strings.Contains(b.String(), "Quic_GO.(*session).run")
 }
 
 func areClosedSessionsRunning() bool {
 	var b bytes.Buffer
 	pprof.Lookup("goroutine").WriteTo(&b, 1)
-	return strings.Contains(b.String(), "Superquic-v1.(*closedLocalSession).run")
+	return strings.Contains(b.String(), "Quic_GO.(*closedLocalSession).run")
 }
 
 var _ = Describe("Session", func() {

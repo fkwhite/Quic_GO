@@ -3,7 +3,7 @@ package quic
 import (
 	"fmt"
 
-	"github.com/fkwhite/Superquic-v1/internal/qerr"
+	"github.com/fkwhite/Quic_GO/internal/qerr"
 )
 
 type (
