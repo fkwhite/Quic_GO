@@ -34,7 +34,7 @@ func GlobalBuffersIncr(streamIdx int, delta float64) {
 	defer globalBuffers.mtxs[streamIdx].Unlock()
 
 	globalBuffers.buffers[streamIdx] += delta
-	fmt.Println("El tamaño del buffer es: ", globalBuffers.buffers[streamIdx])
+	//fmt.Println("El tamaño del buffer es: ", globalBuffers.buffers[streamIdx])
 	//fmt.Println("Lenght ", len(globalBuffers.registerIn[streamIdx]))
 	if delta != 0 {
 		if math.Signbit(delta) { // Delta negativo -> true
