@@ -402,6 +402,7 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 	// The penalty is based on the number of bytes in the queue (higher number of bytes, higher priority) and the penalties of each stream.
 	r := make([]protocol.ByteCount, numActiveStreams)
 	var sum_r protocol.ByteCount
+	var sum int64
 	var delay = make([]int64, numActiveStreams)
 	for i := 0; i < numActiveStreams; i++ {
 		id := f.streamQueue[i]
