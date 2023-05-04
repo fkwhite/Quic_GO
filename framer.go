@@ -32,6 +32,7 @@ type framer interface {
 	SchedulerWFQ([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)             //CRIS
 	SchedulerFairQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)     //CRIS
 	SchedulerDelayQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
+	SchedulerMaxDelayQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 	AppendStreamFrames([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 
 	Handle0RTTRejection() error
@@ -371,6 +372,129 @@ func (f *framerI) SchedulerDelayQueuing(frames []ackhandler.Frame, maxLen protoc
 	}
 	return frames, length
 }
+
+
+
+// TODO: scheduler --> Delay Queuing
+func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount) {
+	var length protocol.ByteCount
+	var lastFrame *ackhandler.Frame
+
+	configFile := "conf_Scheduler.json"
+	file, err := os.Open(configFile)
+	if err != nil {
+		fmt.Println("An error has ocurred -- Opening configuration file")
+		panic(err)
+	}
+	defer file.Close()
+	decoder := json.NewDecoder(file)
+	configuration := Configuration{}
+	err = decoder.Decode(&configuration)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+
+	f.mutex.Lock()
+
+	numActiveStreams := len(f.streamQueue)
+	// Whoever has the highest penalty sends (as much maxlen as possible).
+	// If there are not enough bytes in the buffer, they are sent from the next stream with the highest priority.
+	// The penalty is based on the number of bytes in the queue (higher number of bytes, higher priority) and the penalties of each stream.
+	r := make([]protocol.ByteCount, numActiveStreams)
+	var sum_r protocol.ByteCount
+	var delay = make([]int64, numActiveStreams)
+	for i := 0; i < numActiveStreams; i++ {
+		id := f.streamQueue[i]
+		str, _ := f.streamGetter.GetOrOpenSendStream(id)
+
+		delay[i] = GlobalBuffersPktDelay(int(id / 4))
+		sum = GlobalBuffersTotalDelay(int(id / 4))
+		timestamp := time.Now().UnixMicro()
+		GlobalBuffersSojournTimeLog("DelayMax", timestamp, int(id/4), sum)
+		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
+
+		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
+		// fmt.Println("Bytes para enviar ", str.RemainingBytes(), "\n")
+		// fmt.Println("Bytes para RTX ", str.BytesToRetransmit(), "\n")
+		// fmt.Println("Bytes en el buffer de id ", i, ": ", buffBytes)
+		// fmt.Println("Bytes para Next Stream ", str.nextFrame.DataLen(), "\n")
+		totalTX := str.TotalQueue() + buffBytes // bufferTx + bufferRtx + bufferNextFrame   + buffer Real (app)
+		r[i] = totalTX
+		sum_r += r[i]
+	}
+
+	//fmt.Println("Streams Activos: ", numActiveStreams)
+	for i := 0; i < numActiveStreams; i++ {
+		for j := 0; j < numActiveStreams; j++ {
+			if int64(delay[i]) > int64(delay[j]) {
+				aux := delay[j]
+				delay[j] = delay[i]
+				delay[i] = aux
+				aux2 := f.streamQueue[j]
+				f.streamQueue[j] = f.streamQueue[i]
+				f.streamQueue[i] = aux2
+			}
+		}
+	}
+
+	// for i := 0; i < numActiveStreams; i++ {
+	// 	fmt.Printf("%d %i ", sum[i], f.streamQueue[i])
+	// }
+	// fmt.Printf("\n")
+
+	for i := 0; i < numActiveStreams; i++ {
+		// pop STREAM frames, until less than MinStreamFrameSize bytes are left in the packet
+		if protocol.MinStreamFrameSize+length > maxLen {
+			break
+		}
+
+		id := f.streamQueue[0]
+		f.streamQueue = f.streamQueue[1:]
+		f.streamQueue = append(f.streamQueue, id)
+		// This should never return an error. Better check it anyway.
+		// The stream will only be in the streamQueue, if it enqueued itself there.
+		str, err := f.streamGetter.GetOrOpenSendStream(id)
+		// The stream can be nil if it completed after it said it had data.
+		if str == nil || err != nil {
+			delete(f.activeStreams, id)
+			continue
+		}
+		remainingLen := maxLen - length
+		// For the last STREAM frame, we'll remove the DataLen field later.
+		// Therefore, we can pretend to have more bytes available when popping
+		// the STREAM frame (which will always have the DataLen set).
+
+		remainingLen += quicvarint.Len(uint64(remainingLen)) // value que varia en función del pkt
+		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
+		totalTX := str.TotalQueue() + buffBytes
+		//fmt.Println("Bytes para enviar ", str.RemainingBytes(), " ", buffBytes)
+
+		frame, _ := str.popStreamFrame(remainingLen)
+
+		// The frame can be nil
+		// * if the receiveStream was canceled after it said it had data
+		// * the remaining size doesn't allow us to add another STREAM frame
+		if frame == nil {
+			continue
+		}
+		timestamp := time.Now().UnixMicro()
+		writeFile("Delay", timestamp, id, totalTX, frame.Length(f.version))
+		frames = append(frames, *frame)
+		length += frame.Length(f.version)
+		lastFrame = frame
+
+	}
+
+	f.mutex.Unlock()
+	if lastFrame != nil {
+		lastFrameLen := lastFrame.Length(f.version)
+		// account for the smaller size of the last STREAM frame
+		lastFrame.Frame.(*wire.StreamFrame).DataLenPresent = false
+		length += lastFrame.Length(f.version) - lastFrameLen
+	}
+	return frames, length
+}
+
 
 // TODO: scheduler --> WFQ
 func (f *framerI) SchedulerWFQ(frames []ackhandler.Frame, maxLen protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount) {
