@@ -153,9 +153,10 @@ func GlobalBuffersPktDelay(streamIdx int) int64{
 
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
-	retrun globalBuffers.registerIn[streamIdx]
-		
-	
+	for val, _ := range globalBuffers.registerIn[streamIdx] {
+		break
+	}
+	return val
 }
 
 func GlobalBuffersTotalDelay(streamIdx int) int64 {
