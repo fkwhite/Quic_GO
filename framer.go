@@ -412,7 +412,7 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 		sum = GlobalBuffersTotalDelay(int(id / 4))
 		timestamp := time.Now().UnixMicro()
 		delay[i] = timestamp - aux
-		fmt.Printf("Delay of stream %i is %i\n",i, delay[i])
+		fmt.Printf("Delay of stream %d is %d\n",i, delay[i])
 		GlobalBuffersSojournTimeLog("MaxDelay", timestamp, int(id/4), sum)
 		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
 

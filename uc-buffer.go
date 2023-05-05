@@ -154,19 +154,19 @@ func GlobalBuffersPktDelay(streamIdx int) int64{
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
 	// fmt.Println(globalBuffers.registerIn[streamIdx])
-	for val, _ := range globalBuffers.registerIn[streamIdx] {
-		return val
-		break
-	}
+	// for val, _ := range globalBuffers.registerIn[streamIdx] {
+	// 	return val
+	// 	break
+	// }
 
 	for val, _ := range globalBuffers.registerIn[streamIdx] {
         if (val < min) {
             min = val
         }
 	}
-	if(min == val){
-		fmt.Println("Equal")
-	}
+	// if(min == val){
+	// 	fmt.Println("Equal")
+	// }
 	return val
 }
 
