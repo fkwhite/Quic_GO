@@ -452,6 +452,7 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 		}
 
 		id := f.streamQueue[0]
+		fmt.Printf("Stream %i TX\n",id)
 		f.streamQueue = f.streamQueue[1:]
 		f.streamQueue = append(f.streamQueue, id)
 		// This should never return an error. Better check it anyway.
