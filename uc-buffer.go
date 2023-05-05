@@ -150,7 +150,7 @@ func GlobalBuffersSojournTimeLog(scheduler string, timestamp int64, id int, sum 
 }
 
 func GlobalBuffersPktDelay(streamIdx int) int64{
-	var val, min int64
+	var  min int64
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
 	// fmt.Println(globalBuffers.registerIn[streamIdx])
@@ -167,7 +167,7 @@ func GlobalBuffersPktDelay(streamIdx int) int64{
 	// if(min == val){
 	// 	fmt.Println("Equal")
 	// }
-	return val
+	return min
 }
 
 func GlobalBuffersTotalDelay(streamIdx int) int64 {
