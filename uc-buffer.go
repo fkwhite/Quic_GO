@@ -160,6 +160,7 @@ func GlobalBuffersPktDelay(streamIdx int) int64{
 	// }
 
 	for val, _ := range globalBuffers.registerIn[streamIdx] {
+		fmt.Printf("delay Pkt. %i ",val)
         if (val < min) {
             min = val
         }
