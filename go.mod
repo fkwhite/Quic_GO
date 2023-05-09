@@ -7,9 +7,9 @@ require (
 	github.com/marten-seemann/qtls-go1-18 v0.1.4
 	github.com/marten-seemann/qtls-go1-19 v0.1.2
 	github.com/onsi/ginkgo v1.16.5
-	golang.org/x/crypto v0.8.0
-	golang.org/x/net v0.9.0
-	golang.org/x/sys v0.7.0
+	golang.org/x/crypto v0.9.0
+	golang.org/x/net v0.10.0
+	golang.org/x/sys v0.8.0
 )
 
 require (
