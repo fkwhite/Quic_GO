@@ -6,6 +6,7 @@ import (
 	"math"
 	"os"
 	"sync"
+	"sort"
 	"time"
 )
 
@@ -72,31 +73,41 @@ func GlobalBuffersLog(streamIdx int) {
 func GlobalBuffersIncr(streamIdx int, delta float64) {
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
-
+	keys := make([]int, 0)
 	globalBuffers.buffers[streamIdx] += delta
 	//fmt.Println("El tamaño del buffer es: ", globalBuffers.buffers[streamIdx])
 	//fmt.Println("Lenght ", len(globalBuffers.registerIn[streamIdx]))
 	if delta != 0 {
 		if math.Signbit(delta) { // Delta negativo -> true
+			for k, _ := range globalBuffers.registerIn[streamIdx] {
+				keys = append(keys, int(k))
+			}
+			// fmt.Println("+++++++++ Timestamps ordered +++++++++++")
+			sort.Ints((keys))
+			// for _, k := range keys {
+			// 	fmt.Printf("Pkt. delay %d - Pkt. size %d\n",k,globalBuffers.registerIn[streamIdx][int64(k)])
+			// }
+
 			var aux = math.Abs(delta)
-			for key, element := range globalBuffers.registerIn[streamIdx] {
+			for _, key :=  range keys {
+				element := globalBuffers.registerIn[streamIdx][int64(key)]
+				// fmt.Printf("Pkt. delay %d - Pkt. size %f\n",key,element)
 				timeOut := time.Now().UnixMicro()
 				if element > aux {
-					globalBuffers.registerIn[streamIdx][key] = element - aux
+					globalBuffers.registerIn[streamIdx][int64(key)] = element - aux
 					globalBuffers.registerOut[streamIdx][timeOut] = make(map[int64]float64)
-					globalBuffers.registerOut[streamIdx][timeOut][key] = aux
-
+					globalBuffers.registerOut[streamIdx][timeOut][int64(key)] = aux
 					break
 				} else if element == aux {
 					globalBuffers.registerOut[streamIdx][timeOut] = make(map[int64]float64)
-					globalBuffers.registerOut[streamIdx][timeOut][key] = aux
-					delete(globalBuffers.registerIn[streamIdx], key)
+					globalBuffers.registerOut[streamIdx][timeOut][int64(key)] = aux
+					delete(globalBuffers.registerIn[streamIdx], int64(key))
 					break
 				} else {
 					aux = aux - element
 					globalBuffers.registerOut[streamIdx][timeOut] = make(map[int64]float64)
-					globalBuffers.registerOut[streamIdx][timeOut][key] = element
-					delete(globalBuffers.registerIn[streamIdx], key)
+					globalBuffers.registerOut[streamIdx][timeOut][int64(key)] = element
+					delete(globalBuffers.registerIn[streamIdx], int64(key))
 				}
 			}
 
@@ -109,6 +120,7 @@ func GlobalBuffersIncr(streamIdx int, delta float64) {
 	}
 
 }
+
 
 func GlobalBuffersRead(streamIdx int) float64 {
 	// if (streamIdx >= globalBuffers.len){
@@ -185,9 +197,9 @@ func GlobalBuffersPktDelayFirst(streamIdx int) int64{
 	defer globalBuffers.mtxs[streamIdx].Unlock()
 
 	
-	fmt.Println("+++++++++Timestamp++++++++")
+	// fmt.Println("+++++++++Timestamp++++++++")
 	if(len(globalBuffers.registerIn[streamIdx]) == 0){
-		fmt.Println("--------Empty--------")
+		// fmt.Println("--------Empty--------")
 		min = 0
 	}else{
 	
