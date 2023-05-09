@@ -151,24 +151,54 @@ func GlobalBuffersSojournTimeLog(scheduler string, timestamp int64, id int, sum 
 
 func GlobalBuffersPktDelay(streamIdx int) int64{
 	var  min int64
+	min = 999999999999999999 
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
-	// fmt.Println(globalBuffers.registerIn[streamIdx])
-	// for val, _ := range globalBuffers.registerIn[streamIdx] {
-	// 	return val
-	// 	break
-	// }
-	fmt.Println("+++++TimeStamp+++++")
-	for val, _ := range globalBuffers.registerIn[streamIdx] {
-		fmt.Printf("delay Pkt. %i \n",val)
-        if (val < min) {
-            min = val
-        }
+
+	// timestamp := time.Now().UnixMicro()
+	// fmt.Println("+++++++++Timestamp++++++++")
+	if(len(globalBuffers.registerIn[streamIdx]) == 0){
+		// fmt.Println("--------Empty--------")
+		min = 0
+	}else{
+		// for val, _ := range globalBuffers.registerIn[streamIdx] {
+		// 	fmt.Printf("delay Pkt. %d  and buffer len %d\n",timestamp-val,len(globalBuffers.registerIn[streamIdx]))
+			
+		// }
+
+		for val, _ := range globalBuffers.registerIn[streamIdx] {
+			if (val < min) {
+				// fmt.Printf("min delay Pkt. %d \n",val)
+				min = val
+			}
+		}
 	}
-	// if(min == val){
-	// 	fmt.Println("Equal")
-	// }
 	return min
+	
+}
+
+
+func GlobalBuffersPktDelayFirst(streamIdx int) int64{
+	var  min int64
+	min = 999999999999999999 
+	globalBuffers.mtxs[streamIdx].Lock()
+	defer globalBuffers.mtxs[streamIdx].Unlock()
+
+	
+	fmt.Println("+++++++++Timestamp++++++++")
+	if(len(globalBuffers.registerIn[streamIdx]) == 0){
+		fmt.Println("--------Empty--------")
+		min = 0
+	}else{
+	
+
+		for val, _ := range globalBuffers.registerIn[streamIdx] {
+			min = val
+			break
+		}
+	}
+	return min
+	
 }
 
 func GlobalBuffersTotalDelay(streamIdx int) int64 {

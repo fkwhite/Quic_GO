@@ -408,11 +408,15 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 		id := f.streamQueue[i]
 		str, _ := f.streamGetter.GetOrOpenSendStream(id)
 
-		aux := GlobalBuffersPktDelay(int(id / 4))
+		firstpktFIFO := GlobalBuffersPktDelay(int(id / 4))
 		sum = GlobalBuffersTotalDelay(int(id / 4))
 		timestamp := time.Now().UnixMicro()
-		delay[i] = timestamp - aux
-		fmt.Printf("Delay of stream %d is %d\n",i, delay[i])
+		if(firstpktFIFO !=0 ){
+			delay[i] = timestamp - firstpktFIFO
+		}else{
+			delay[i] = 0
+		}
+		
 		GlobalBuffersSojournTimeLog("MaxDelay", timestamp, int(id/4), sum)
 		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
 
@@ -425,6 +429,10 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 		r[i] = totalTX
 		sum_r += r[i]
 	}
+
+	// for i := 0; i < numActiveStreams; i++ {
+	// 	fmt.Printf("Delay of stream %d is %d\n",f.streamQueue[i], delay[i])
+	// }
 
 	//fmt.Println("Streams Activos: ", numActiveStreams)
 	for i := 0; i < numActiveStreams; i++ {
@@ -441,9 +449,9 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 	}
 
 	// for i := 0; i < numActiveStreams; i++ {
-	// 	fmt.Printf("%d %i ", sum[i], f.streamQueue[i])
+	// 	fmt.Printf("Delay of stream %d is %d\n",f.streamQueue[i], delay[i])
 	// }
-	// fmt.Printf("\n")
+
 
 	for i := 0; i < numActiveStreams; i++ {
 		// pop STREAM frames, until less than MinStreamFrameSize bytes are left in the packet
@@ -452,7 +460,7 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 		}
 
 		id := f.streamQueue[0]
-		fmt.Printf("Stream %i TX\n",id)
+		// fmt.Printf("Stream %d TX\n",id)
 		f.streamQueue = f.streamQueue[1:]
 		f.streamQueue = append(f.streamQueue, id)
 		// This should never return an error. Better check it anyway.
