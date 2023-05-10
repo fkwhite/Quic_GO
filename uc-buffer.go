@@ -54,8 +54,15 @@ func GlobalBuffersLog(streamIdx int) {
 	}
 	defer f.Close()
 
-	for key1, map_ := range globalBuffers.registerOut[streamIdx] {
-		for key2, element := range map_ {
+	keys := make([]float64, 0)
+	for k, _ := range globalBuffers.registerOut[streamIdx] {
+		keys = append(keys, float64(k))
+	}
+	// fmt.Println("+++++++++ Timestamps ordered +++++++++++")
+	sort.Float64s((keys))
+
+	for _, key1 :=  range keys {
+		for key2, element := range globalBuffers.registerOut[streamIdx][int64(key1)] {
 			logMessage := fmt.Sprint(key1, " ", key2, " ", element, "\n")
 			//fmt.Println(logMessage) //por pantalla
 			_, err = f.WriteString(logMessage) //fichero log
@@ -64,8 +71,19 @@ func GlobalBuffersLog(streamIdx int) {
 				panic(err)
 			}
 		}
-
 	}
+	// for key1, map_ := range globalBuffers.registerOut[streamIdx] {
+	// 	for key2, element := range map_ {
+	// 		logMessage := fmt.Sprint(key1, " ", key2, " ", element, "\n")
+	// 		//fmt.Println(logMessage) //por pantalla
+	// 		_, err = f.WriteString(logMessage) //fichero log
+	// 		if err != nil {
+	// 			fmt.Println("An error has ocurred -- Writing file")
+	// 			panic(err)
+	// 		}
+	// 	}
+
+	// }
 
 }
 
@@ -73,19 +91,21 @@ func GlobalBuffersLog(streamIdx int) {
 func GlobalBuffersIncr(streamIdx int, delta float64) {
 	globalBuffers.mtxs[streamIdx].Lock()
 	defer globalBuffers.mtxs[streamIdx].Unlock()
-	keys := make([]int, 0)
+	keys := make([]float64, 0)
 	globalBuffers.buffers[streamIdx] += delta
 	//fmt.Println("El tamaño del buffer es: ", globalBuffers.buffers[streamIdx])
 	//fmt.Println("Lenght ", len(globalBuffers.registerIn[streamIdx]))
 	if delta != 0 {
 		if math.Signbit(delta) { // Delta negativo -> true
 			for k, _ := range globalBuffers.registerIn[streamIdx] {
-				keys = append(keys, int(k))
+				keys = append(keys, float64(k))
 			}
 			// fmt.Println("+++++++++ Timestamps ordered +++++++++++")
-			sort.Ints((keys))
+			sort.Float64s((keys))
+			// timestamp := time.Now().UnixMicro()
+			// fmt.Printf("New try - Stream %d\n",streamIdx)
 			// for _, k := range keys {
-			// 	fmt.Printf("Pkt. delay %d - Pkt. size %d\n",k,globalBuffers.registerIn[streamIdx][int64(k)])
+			// 	fmt.Printf("Pkt. delay time %d - Pkt. size %d\n", int64(k),globalBuffers.registerIn[streamIdx][int64(k)])
 			// }
 
 			var aux = math.Abs(delta)
