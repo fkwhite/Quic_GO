@@ -490,7 +490,7 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 			continue
 		}
 		timestamp := time.Now().UnixMicro()
-		writeFile("Delay", timestamp, id, totalTX, frame.Length(f.version))
+		writeFile("MaxDelay", timestamp, id, totalTX, frame.Length(f.version))
 		frames = append(frames, *frame)
 		length += frame.Length(f.version)
 		lastFrame = frame
