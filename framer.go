@@ -487,7 +487,7 @@ func (f *framerI) SchedulerSTBPQueuing(frames []ackhandler.Frame, maxLen protoco
 			continue
 		}
 		timestamp := time.Now().UnixMicro()
-		writeFile("Delay", timestamp, id, totalTX, frame.Length(f.version))
+		writeFile("STBP", timestamp, id, totalTX, frame.Length(f.version))
 		frames = append(frames, *frame)
 		length += frame.Length(f.version)
 		lastFrame = frame
