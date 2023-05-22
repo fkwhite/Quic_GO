@@ -149,6 +149,7 @@ type frameSource interface {
 	SchedulerFairQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)     //CRIS
 	SchedulerDelayQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 	SchedulerMaxDelayQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
+	SchedulerSTBPQueuing([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 	AppendStreamFrames([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 	AppendControlFrames([]ackhandler.Frame, protocol.ByteCount) ([]ackhandler.Frame, protocol.ByteCount)
 	// AdvancedOutgoingStreamManagement defines extra methods to better control outgoing streams
@@ -680,6 +681,8 @@ func (p *packetPacker) composeNextPacket(maxFrameSize protocol.ByteCount, ackAll
 			payload.frames, lengthAdded = p.framer.SchedulerProposalQueuing(payload.frames, maxFrameSize-payload.length)
 		case "Delay":
 			payload.frames, lengthAdded = p.framer.SchedulerDelayQueuing(payload.frames, maxFrameSize-payload.length)
+		case "STBP":
+			payload.frames, lengthAdded = p.framer.SchedulerSTBPQueuing(payload.frames, maxFrameSize-payload.length)
 		case "MaxDelay":
 			payload.frames, lengthAdded = p.framer.SchedulerMaxDelayQueuing(payload.frames, maxFrameSize-payload.length)
 		}

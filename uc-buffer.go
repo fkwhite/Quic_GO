@@ -243,3 +243,20 @@ func GlobalBuffersTotalDelay(streamIdx int) int64 {
 	}
 	return sum
 }
+
+
+
+func GlobalBuffersSojournTime(streamIdx int) (int64,int) {
+	var sum int64
+	sum = 0
+	globalBuffers.mtxs[streamIdx].Lock()
+	defer globalBuffers.mtxs[streamIdx].Unlock()
+	num_data := len(globalBuffers.registerIn[streamIdx])
+	if (num_data!=0){
+		for val, _ := range globalBuffers.registerIn[streamIdx] {
+			sum += val
+		}
+	}
+	
+	return sum,num_data
+}
