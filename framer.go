@@ -556,14 +556,12 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 	// The penalty is based on the number of bytes in the queue (higher number of bytes, higher priority) and the penalties of each stream.
 	r := make([]protocol.ByteCount, numActiveStreams)
 	var sum_r protocol.ByteCount
-	var sum int64
 	var delay = make([]int64, numActiveStreams)
 	for i := 0; i < numActiveStreams; i++ {
 		id := f.streamQueue[i]
 		str, _ := f.streamGetter.GetOrOpenSendStream(id)
 
 		firstpktFIFO := GlobalBuffersPktDelay(int(id / 4))
-		sum = GlobalBuffersTotalDelay(int(id / 4))
 		timestamp := time.Now().UnixMicro()
 		if(firstpktFIFO !=0 ){
 			delay[i] = timestamp - firstpktFIFO
@@ -571,7 +569,14 @@ func (f *framerI) SchedulerMaxDelayQueuing(frames []ackhandler.Frame, maxLen pro
 			delay[i] = 0
 		}
 		
-		GlobalBuffersSojournTimeLog("MaxDelay", timestamp, int(id/4), sum)
+		// Obtaining sojourn time from slices of data
+		sumaux, num_data := GlobalBuffersSojournTime(int(id / 4))
+		if (num_data!=0){
+			sumaux = int64(num_data)*timestamp - sumaux
+		}else{
+			sumaux = 0
+		}
+		GlobalBuffersSojournTimeLog("MaxDelay", timestamp, int(id/4), sumaux)
 		//fmt.Println("Retardo acumulado del id ", f.streamQueue[i], " es: ", sum[i])
 
 		buffBytes := protocol.ByteCount(GlobalBuffersRead(int(id / 4)))
